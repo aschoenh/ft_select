@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:40:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/14 19:36:24 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/18 20:01:48 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ static void		get_config(char *term_type)
 	int			is_term;
 	
 	if (!(isatty(2)))
+	{
 		errors_and_exit(TERMIN);
+	}
 	is_term = tgetent(NULL, term_type);
 	if ((is_term = tgetent(NULL, term_type)) < 1)
+	{
 		if (is_term == 0)
 			errors_and_exit(NO_ENTRY);
 		errors_and_exit(NOT_FOUND);
+	}
 	
 }
 
@@ -39,25 +43,25 @@ static void		get_config(char *term_type)
  check de l'acces a la variable TERM, recup la configuration du terminal, la sauvegarde pour le reset a la fin, et change le terminal en mode canonique + set le read de buffer pour pouvoir interpreter les caracteres "ESC [ A" (== fleche du haut) et application de ces changements (TCSANOW);;
  */
 
-void			init_configuration(t_select *infos)
+void			init_configuration(void)
 {
-	if (!(infos->term_type = getenv("TERM")))
+	if (!(g_infos.term_type = getenv("TERM")))
 		errors_and_exit(TERM);
-	get_config(infos->term_type);
-	tcgetattr(2, (&infos->old_config));
-	tcgetattr(2, (&infos->our_config));
-	infos->our_config.c_lflag &= ~(ICANON);
-	infos->our_config.c_lflag &= ~(ECHO);
-	infos->our_config.c_cc[VMIN] = 1;
-	infos->our_config.c_cc[VTIME] = 0;
-	tcsetattr(2, TCSANOW, &(infos->our_config));
+	get_config(g_infos.term_type);
+	tcgetattr(2, &g_infos.old_config);
+	tcgetattr(2, &g_infos.our_config);
+	g_infos.our_config.c_lflag &= ~(ICANON);
+	g_infos.our_config.c_lflag &= ~(ECHO);
+	g_infos.our_config.c_cc[VMIN] = 1;
+	g_infos.our_config.c_cc[VTIME] = 0;
+	tcsetattr(2, TCSANOW, &g_infos.our_config);
 }
 
 /*
  * initialise les signaux qu'on doit gerer avec la fonction signal_handler
  */
 
-void			init_sig_handler()
+void			init_sig_handler(void)
 {
 	signal(SIGWINCH, sig_handler);//	    	SIGWINCH discard signal    		Window size change
 	signal(SIGABRT, sig_handler); // 		SIGABRT create core image		abort program

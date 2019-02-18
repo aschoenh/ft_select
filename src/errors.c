@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:30:41 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/14 19:32:48 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/18 17:27:09 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		errors_and_exit(int error)
 {
+	//free au cas ou 
+	//
 	if (error == USAGE)
 	{
 		ft_putendl_fd("ft_select need at least one argument.", 2);

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 11:16:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/18 13:11:38 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:26:33 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				ft_isprint(int c);
 int				ft_isalnumstr(char *str);
 int				ft_isdigitstr(char *str);
 int				ft_toupper(int c);
-int				ft_tolower(int c);
+char			*ft_tolower(char *str);
 int				ft_countwordssep(char *s, char a, char b, char c);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);

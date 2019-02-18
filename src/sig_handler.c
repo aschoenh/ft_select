@@ -6,15 +6,15 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 19:11:01 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/14 19:40:34 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/18 20:03:06 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_select.h"
 
-static void	handler(int action, t_select infos)
+void		handler(int action)
 {
-	reset_config(infos);
+	reset_config();
 	if (action == STOP)
 	{
 //		free_all();
@@ -23,19 +23,25 @@ static void	handler(int action, t_select infos)
 	else if (action == SUSPEND)
 	{
 		// voir comment bien suspendre le prrogramme + probleme de comment recuperer les signaux (par exemple, fg, une fois le programme suspendu?
+		signal(SIGTSTP, SIG_DFL);
+		ioctl(2, TIOCSTI, "\x1A");
 	}
 }
 
-void		sig_handler(int signo, t_select infos)
+void		sig_handler(int signo)
 {
 	if (signo == SIGTSTP)
-		handler(SUSPEND, infos);
+		handler(SUSPEND);
 	else if (signo == SIGINT || signo == SIGQUIT || signo == SIGSTOP
 				|| signo == SIGKILL || signo == SIGABRT)
-		handler(STOP, infos);
+		handler(STOP);
 	else if (signo == SIGCONT)
+	{
 		// reprendre le programme : refaire la config et renit les sig? 
-		ft_printf(" ");
+		init_configuration();
+		init_sig_handler();
+		change_display();
+	}
 	else if (signo == SIGWINCH)
 		change_display();
 }
