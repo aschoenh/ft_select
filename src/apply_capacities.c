@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:44:07 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 20:19:36 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:19:00 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ static void				space_key(void)
 		(g_infos.active_arg) = &(*g_infos.active_arg)->next;
 }
 
+static char				*ft_get_parent_path(char *cwd)
+{
+	char				*last_part;
+	char				*parent;
+
+	last_part = ft_strrchr(cwd, '/');
+	if (!(parent = ft_strndup(cwd, last_part - cwd)))
+		errors_and_exit(MALL_ERR);
+	return (parent);
+}
+
 static void				browsing(int move)
 {
 	DIR					*dir;
@@ -46,12 +57,12 @@ static void				browsing(int move)
 	char				*cwd;
 
 	cwd = getcwd(NULL, MAXPATHLEN);
-/*	name = (move == BROWSE_IN) ? ft_pathjoin(cwd, (*g_infos.active_arg)->value)
+	name = (move == BROWSE_IN) ? ft_pathjoin(cwd, (*g_infos.active_arg)->value)
 		: ft_get_parent_path(cwd);
-*/	free(cwd);
+	free(cwd);
 	if (!(dir = opendir(name)))
 		return (free(name));
-//	free_all();
+	free_all();
 	while ((entry = readdir(dir)))
 	{
 		if (entry->d_name[0] == '.')
@@ -86,8 +97,8 @@ void					apply_caps(void)
 			break ;
 		else if (c == SPACE_KEY)
 			space_key();
-//		else if (c == DEL_KEY || c == BCKSP_KEY)
-//			delete_selected_arg();
+		else if (c == DEL_KEY || c == BCKSP_KEY)
+			delete_selected_arg();
 		else if (c == ESC_KEY)
 			handler(STOP);
 		else if (c == BROWSE_IN || c == BROWSE_OUT)

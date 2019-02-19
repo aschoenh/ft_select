@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:30:41 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 17:27:09 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 13:02:47 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void		errors_and_exit(int error)
 		ft_putendl_fd("No entry of your terminal in the database.", 2);
 	if (error == NOT_FOUND)
 		ft_putendl_fd("Terminfo database could not be found.", 2);
-		exit (EXIT_FAILURE);
+	exit (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 17:10:15 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 19:44:24 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:42:53 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static t_type		get_type(char *file)
 		name = file;
 	if (name[0] == '.')
 		return (DOT_TYPE);
-	if (!(ft_strcmp(ft_tolower(file), "makefile")))
+	else if (!(ft_strcmp(ft_tolower(file), "makefile")))
 		return (MAKEFILE_TYPE);
-	name = ft_strrev(name);
+	else 
+		name = ft_strrev(name);
 	if (name[0] == 'c' && name[1] == '.')
 		return (C_TYPE);
 	else if (name[0] == 'h' && name[1] == '.')
@@ -66,6 +67,7 @@ void				init_args(char **av)
 {
 	int				i;
 
+	i = -1;
 	g_infos.ac = 0;
 	while (av[++i])
 		insert_arg(av[i]);

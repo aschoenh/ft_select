@@ -6,13 +6,13 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 19:11:01 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 20:03:06 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 14:08:12 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_select.h"
 
-void		handler(int action)
+void		handler(t_handle action)
 {
 	reset_config();
 	if (action == STOP)

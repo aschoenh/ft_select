@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:13:11 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 20:19:17 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:21:58 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,21 @@ typedef enum			e_dim
 t_infos					g_infos;
 
 enum					{USAGE, TERM, TERMIN, NO_ENTRY, NOT_FOUND, MALL_ERR};
-enum					{STOP, SUSPEND};
+
+typedef enum			e_handle
+{
+	STOP,
+	SUSPEND
+}						t_handle;
+
+char					*ft_pathjoin(char *cwd, char *name);
 void					errors_and_exit(int error);
 void					init_configuration(void);
 void					init_sig_handler(void);
 void					reset_config(void);
 void					init_sig_handler(void);
 void					sig_handler(int signo);
-void					handler(int action);
+void					handler(t_handle action);
 void					apply_caps(void);
 void					init_args(char **args);
 void					insert_arg(char *file);
@@ -118,5 +125,8 @@ int						get_rows(int cols);
 int						get_max_len_args(void);
 int						ft_print_puts(int n);
 void					print_value_fd(t_arg *arg, int fd);
+void					delete_selected_arg(void);
+void					free_all(void);
+void					print_selection(void);
 
 #endif

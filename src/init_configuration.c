@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:40:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/18 20:01:48 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:45:16 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void		get_config(char *term_type)
 	int			is_term;
 	
 	if (!(isatty(2)))
-	{
 		errors_and_exit(TERMIN);
-	}
 	is_term = tgetent(NULL, term_type);
 	if ((is_term = tgetent(NULL, term_type)) < 1)
 	{
@@ -36,7 +34,6 @@ static void		get_config(char *term_type)
 			errors_and_exit(NO_ENTRY);
 		errors_and_exit(NOT_FOUND);
 	}
-	
 }
 
 /*
@@ -55,6 +52,8 @@ void			init_configuration(void)
 	g_infos.our_config.c_cc[VMIN] = 1;
 	g_infos.our_config.c_cc[VTIME] = 0;
 	tcsetattr(2, TCSANOW, &g_infos.our_config);
+	tputs(tgetstr("ti", NULL), 1, ft_print_puts);
+	tputs(tgetstr("vi", NULL), 1, ft_print_puts);
 }
 
 /*
