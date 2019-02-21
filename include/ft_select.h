@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:13:11 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/19 15:21:58 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 16:38:50 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <term.h>
 # include <curses.h>
 # include <sys/param.h>
+# include <ftw.h>
 
 # define ENTER_KEY		0xA
 # define SPACE_KEY		0x20

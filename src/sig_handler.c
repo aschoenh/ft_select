@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 19:11:01 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/19 14:08:12 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 16:35:22 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void		sig_handler(int signo)
 	if (signo == SIGTSTP)
 		handler(SUSPEND);
 	else if (signo == SIGINT || signo == SIGQUIT || signo == SIGSTOP
-				|| signo == SIGKILL || signo == SIGABRT)
+				|| signo == SIGKILL || signo == SIGABRT || signo == SIGILL
+				|| signo == SIGPIPE || signo == SIGFPE || signo == SIGSYS
+				|| signo == SIGTRAP || signo == SIGHUP || signo == SIGBUS
+				/*|| signo == SIGSEGV */|| signo == SIGALRM || signo == SIGTERM
+				|| signo == SIGUSR1 || signo == SIGUSR2)
 		handler(STOP);
 	else if (signo == SIGCONT)
 	{

@@ -6,16 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:40:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/19 15:45:16 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 16:36:10 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_select.h"
-#include <curses.h>
-#include <term.h>
-#include <unistd.h>
-#include <strings.h>
-#include <stdlib.h>
 
 /*
  * askip c'est mieux de pas utiliser 1 pour atty, sinon ca bug quand ont passe "ft_select x y z" en argument d'une autre fonction style LS. la library terminfo adaptee au terminal est chargee, sinon erreur et exit.
@@ -70,4 +65,17 @@ void			init_sig_handler(void)
 	signal(SIGTSTP, sig_handler); // 		SIGTSTP stop process      stop signal generated from keyboard
 	signal(SIGKILL, sig_handler); // 		SIGKILL terminate process    kill program
 	signal(SIGQUIT, sig_handler); // 		SIGQUIT create core image    quit program
+	signal(SIGILL, sig_handler);
+	signal(SIGPIPE, sig_handler);
+	signal(SIGFPE, sig_handler);
+	signal(SIGSYS, sig_handler);
+	signal(SIGTRAP, sig_handler);
+	signal(SIGHUP, sig_handler);
+	signal(SIGBUS, sig_handler);
+//	signal(SIGSEGV, sig_handler);
+	signal(SIGALRM, sig_handler);
+	signal(SIGTERM, sig_handler);
+	signal(SIGUSR1, sig_handler);
+	signal(SIGUSR2, sig_handler);
+
 }
