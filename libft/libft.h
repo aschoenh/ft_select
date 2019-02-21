@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 11:16:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/19 14:23:00 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 19:03:42 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef	struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_strncmp_insensitive(const char *string1
+					, const char *string2, size_t n);
 char			*ft_strlwr(char *s);
 char			*ft_strupr(char *s);
 int				ft_tab_int_fill(int tab[], unsigned int size, int value);

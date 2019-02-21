@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_selection.c                                  :+:      :+:    :+:   */
+/*   ft_dynamic_search.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 13:52:04 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/21 21:37:54 by aschoenh         ###   ########.fr       */
+/*   Created: 2019/02/21 16:47:57 by aschoenh          #+#    #+#             */
+/*   Updated: 2019/02/21 20:02:05 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_select.h"
 
-void			print_selection(void)
+void			ft_dynamic_search(int c)
 {
-	t_arg		*curr;
-	t_arg		*first;
+	static char	search[1024];
 	int			i;
+	t_arg		*tmp;
 
+	tmp = *g_infos.active_arg;
 	i = 0;
-	curr = g_infos.args;
-	first = curr;
-	while (curr)
+	while (search[i] != '\0')
+		i++;
+	search[i] = c;
+	while (tmp)
 	{
-		if (curr->is_selected)
+		if (!(ft_strncmp(search, tmp->value, i + 1)))
 		{
-			print_value_fd(curr, 1);
-			i++;
-			if (i < g_infos.selected_nbr)
-				ft_putstr_fd(" ", 1);
-		}
-		if (curr->next == first)
+			g_infos.active_arg = &tmp->prev;
+			ft_move(RIGHT_MOVE);
 			break;
-		curr = curr->next;
+		}
+		tmp = tmp->next;
+		if (tmp == *g_infos.active_arg)
+		{
+			ft_memset(search, 0, 1024);
+			break ;
+		}
 	}
 }

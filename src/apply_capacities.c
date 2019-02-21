@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:44:07 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/21 16:16:53 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:21:03 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,14 @@ static void				browsing(int move)
 void					apply_caps(void)
 {
 	unsigned int		c;
+/*	FILE				*fp;
 
-	while (1)
+	fp = fopen("/Users/aschoenh/Desktop/ft_select_git2/comment.txt", "w");
+	fprintf(fp, "we got here");
+	fclose(fp);
+*/	while (1)
 	{
+	ft_putendl_fd("TOOTOTOT", 2);
 		change_display();
 		c = 0;
 		read (2, &c, 8);
@@ -103,7 +108,10 @@ void					apply_caps(void)
 			handler(STOP);
 		else if (c == BROWSE_IN || c == BROWSE_OUT)
 			browsing(c);
-		else
+		else if (c == UP_KEY || c == DOWN_KEY || c == RIGHT_KEY
+				|| c == LEFT_KEY)
 			ft_move(get_move(c));
+		else
+			ft_dynamic_search(c);
 	}
 }

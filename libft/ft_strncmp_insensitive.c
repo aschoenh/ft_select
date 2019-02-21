@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_selection.c                                  :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 13:52:04 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/21 21:37:54 by aschoenh         ###   ########.fr       */
+/*   Created: 2018/11/06 12:00:07 by aschoenh          #+#    #+#             */
+/*   Updated: 2019/02/21 19:02:27 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_select.h"
+#include "libft.h"
 
-void			print_selection(void)
+int			ft_strncmp_insensitive(const char *string1, const char *string2, size_t n)
 {
-	t_arg		*curr;
-	t_arg		*first;
-	int			i;
+	int		i;
+	char	*s1;
+	char	*s2;
 
+	s1 = ft_strdup(string1);
+	s2 = ft_strdup(string2);
+	s1 = ft_tolower(s1);
+	s2 = ft_tolower(s2);
+	if (!n)
+		return (0);
 	i = 0;
-	curr = g_infos.args;
-	first = curr;
-	while (curr)
-	{
-		if (curr->is_selected)
-		{
-			print_value_fd(curr, 1);
-			i++;
-			if (i < g_infos.selected_nbr)
-				ft_putstr_fd(" ", 1);
-		}
-		if (curr->next == first)
-			break;
-		curr = curr->next;
-	}
+	while (*(s1 + i) && (*(s1 + i) == *(s2 + i)) && i + 1 < (int)n)
+		i++;
+	return (*((unsigned char *)s1 + i) - *((unsigned char *)s2 + i));
 }

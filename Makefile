@@ -6,7 +6,7 @@
 #    By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/14 15:11:11 by aschoenh          #+#    #+#              #
-#    Updated: 2019/02/19 15:44:47 by aschoenh         ###   ########.fr        #
+#    Updated: 2019/02/21 20:21:11 by aschoenh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC = $(addprefix -I,$(INC_PATH))
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = main.c errors.c init_configuration.c reset_config.c sig_handler.c apply_capacities.c ft_move.c display.c utils.c init_args.c delete_arg.c free_all.c print_selection.c
+SRC_NAME = main.c errors.c init_configuration.c reset_config.c sig_handler.c apply_capacities.c ft_move.c display.c utils.c init_args.c delete_arg.c free_all.c print_selection.c ft_dynamic_search.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(LFT_PATH)
-	$(CC) -o $(NAME) $(OBJ) -L$(LFT_PATH) -lft -ltermcap
+	$(CC) -o $(NAME) $(OBJ) -L$(LFT_PATH) -lft -ltermcap -fsanitize=address -g3
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:26:27 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/21 16:38:48 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 21:29:03 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,15 @@ void				delete_selected_arg(void)
 	if (!g_infos.active_arg)
 		return ;
 	to_del = *g_infos.active_arg;
+	if (g_infos.args->is_selected)
+		g_infos.selected_nbr--;
 	if (g_infos.args == to_del)
 		g_infos.args = (to_del->next == to_del) ? NULL : to_del->next;
-	else
-		g_infos.active_arg = &to_del->next;
+	g_infos.active_arg = &to_del->next;
 	to_del->next->prev = to_del->prev;
 	to_del->prev->next = to_del->next;
-	delete_arg_real(to_del->value);
+	if (g_infos.no_kidding == 1)
+		delete_arg_real(to_del->value);
 	g_infos.ac--;
 	free(to_del->value);
 	to_del->value = NULL;

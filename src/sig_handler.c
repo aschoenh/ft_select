@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 19:11:01 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/02/21 16:35:22 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/02/21 20:35:43 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		handler(t_handle action)
 	reset_config();
 	if (action == STOP)
 	{
-//		free_all();
+		free_all();
 		exit(EXIT_SUCCESS);
 	}
 	else if (action == SUSPEND)
